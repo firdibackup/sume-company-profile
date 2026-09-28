@@ -27,9 +27,9 @@ function localizedUrl(locale: string, path: string) {
   return `${siteUrl}${prefix}${suffix}`;
 }
 
+// No lastModified: these pages have no real edit date, and a build-time stamp
+// that changes every deploy teaches Google to distrust this site's <lastmod>.
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
-
   return routes.flatMap(({ path, changeFrequency, priority }) => {
     const languages = Object.fromEntries(
       routing.locales.map((locale) => [locale, localizedUrl(locale, path)]),
@@ -37,7 +37,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     return routing.locales.map((locale) => ({
       url: localizedUrl(locale, path),
-      lastModified,
       changeFrequency,
       priority,
       alternates: { languages },

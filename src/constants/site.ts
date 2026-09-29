@@ -27,6 +27,7 @@ export const navLinks: Record<Locale, NavLink[]> = {
     { label: "Data Center", href: "/data-center" },
     { label: "About", href: "/about" },
     { label: "Projects", href: "/our-project" },
+    { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
     // {
     //   label: "Contact",

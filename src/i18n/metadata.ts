@@ -2,7 +2,7 @@ import { routing } from "./routing";
 
 /**
  * Builds `hreflang` alternates for a locale-agnostic path (e.g. `/about`).
- * The default locale (Indonesian) lives at the root, others under `/<locale>`.
+ * The default locale (English) lives at the root, others under `/<locale>`.
  *
  * Returns root-relative URLs that Next.js resolves against `metadataBase`.
  */

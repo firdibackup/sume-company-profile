@@ -7,7 +7,11 @@ import {
   Source_Sans_3,
 } from "next/font/google";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
@@ -61,7 +65,10 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale: locale as Locale, namespace: "Meta" });
+  const t = await getTranslations({
+    locale: locale as Locale,
+    namespace: "Meta",
+  });
   const title = t("title");
   const description = t("description");
 
@@ -92,7 +99,7 @@ export async function generateMetadata({
     },
     openGraph: {
       type: "website",
-      locale: ogLocales[locale] ?? "id_ID",
+      locale: ogLocales[locale] ?? "en_US",
       url: languageAlternates("/")[locale],
       siteName: "SUME Group",
       title,

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { siteUrl } from "@/constants/site";
 import { JsonLd } from "@/lib/json-ld";
-import { routing, type Locale } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
 import {
   DEFAULT_PAGE_SIZE,
   getCategories,
@@ -24,7 +24,7 @@ type PageProps = {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
-  if (locale !== routing.defaultLocale) return {};
+  if (locale !== "id") return {};
 
   const category = await getCategoryBySlug(slug);
   if (!category) return {};
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function CategoryPage({ params, searchParams }: PageProps) {
   const { locale, slug } = await params;
-  if (locale !== routing.defaultLocale) notFound();
+  if (locale !== "id") notFound();
   setRequestLocale(locale as Locale);
 
   const category = await getCategoryBySlug(slug);

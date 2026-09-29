@@ -3,6 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import { ClosingCta } from "@/components/sections/closing-cta";
 import { DataCenterTeaser } from "@/components/sections/data-center-teaser";
 import { Hero } from "@/components/sections/hero";
+import { PartnerBrands } from "@/components/sections/partner-brands";
 import { PositioningStrip } from "@/components/sections/positioning-strip";
 import { SolutionsOverview } from "@/components/sections/solutions-overview";
 import { TrustedBy } from "@/components/sections/trusted-by";
@@ -34,6 +35,7 @@ export default async function Home({ params }: PageProps) {
     <main className="font-body">
       <Hero />
       <PositioningStrip />
+      <PartnerBrands />
       <SolutionsOverview />
       <DataCenterTeaser />
       <WhySume />

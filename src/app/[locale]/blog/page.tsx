@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { siteUrl } from "@/constants/site";
 import { JsonLd, ORGANIZATION_ID } from "@/lib/json-ld";
-import { routing } from "@/i18n/routing";
 import {
   DEFAULT_PAGE_SIZE,
   getCategories,
@@ -33,7 +32,7 @@ export async function generateMetadata({
   params,
 }: BlogPageProps): Promise<Metadata> {
   const { locale } = await params;
-  if (locale !== routing.defaultLocale) return {};
+  if (locale !== "id") return {};
   return {
     title: "Blog",
     description: DESCRIPTION,
@@ -52,7 +51,7 @@ export default async function BlogIndexPage({
   searchParams,
 }: BlogPageProps) {
   const { locale } = await params;
-  if (locale !== routing.defaultLocale) notFound();
+  if (locale !== "id") notFound();
 
   const sp = await searchParams;
   const query = sp.q || undefined;

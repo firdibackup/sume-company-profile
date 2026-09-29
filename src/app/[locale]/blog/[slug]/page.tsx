@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { siteUrl } from "@/constants/site";
 import { JsonLd, ORGANIZATION_ID } from "@/lib/json-ld";
-import { routing, type Locale } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
 import {
   getCategories,
@@ -31,7 +31,7 @@ const DESCRIPTION_FALLBACK =
 
 export async function generateMetadata({ params }: DetailPageProps): Promise<Metadata> {
   const { locale, slug } = await params;
-  if (locale !== routing.defaultLocale) return {};
+  if (locale !== "id") return {};
 
   const post = await getPostBySlug(slug);
   if (!post) return {};
@@ -69,7 +69,7 @@ export async function generateMetadata({ params }: DetailPageProps): Promise<Met
 
 export default async function ArticleDetailPage({ params }: DetailPageProps) {
   const { locale, slug } = await params;
-  if (locale !== routing.defaultLocale) notFound();
+  if (locale !== "id") notFound();
   setRequestLocale(locale as Locale);
 
   // Drafts (and not-yet-live scheduled posts) are hidden from the public by RLS,

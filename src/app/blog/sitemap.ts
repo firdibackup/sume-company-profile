@@ -6,7 +6,7 @@ type ChangeFrequency = NonNullable<
   MetadataRoute.Sitemap[number]["changeFrequency"]
 >;
 
-// The blog is Indonesian-only (non-default locales 404), so blog URLs carry no
+// The blog is Indonesian-only and served unprefixed (see src/proxy.ts), so URLs carry no
 // locale prefix and no hreflang alternates — matching each page's canonical.
 function section(
   basePath: string,

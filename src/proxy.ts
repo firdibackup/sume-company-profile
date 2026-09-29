@@ -34,13 +34,26 @@ export default async function proxy(request: NextRequest) {
     return response;
   }
 
-  // The blog is Indonesian-only. Redirect any English blog URL (/en/blog…) to
-  // the Indonesian blog (/blog…) so it never renders a soft 404 and English
-  // visitors still reach the content. Runs before next-intl routing.
-  if (pathname === "/en/blog" || pathname.startsWith("/en/blog/")) {
+  // The blog is Indonesian-only and lives unprefixed at /blog even though
+  // English is the default locale. Runs before next-intl routing.
+  // Prefixed variants (/en/blog…, /id/blog…) redirect to the canonical /blog…
+  const prefixedBlog = pathname.match(/^\/(?:en|id)(\/blog(?:\/.*)?)$/);
+  if (prefixedBlog) {
     const url = request.nextUrl.clone();
-    url.pathname = pathname.slice("/en".length);
+    url.pathname = prefixedBlog[1];
     return NextResponse.redirect(url, 308);
+  }
+
+  // …and /blog… renders the `id` locale, passing the locale header the same
+  // way next-intl's own rewrite does.
+  if (pathname === "/blog" || pathname.startsWith("/blog/")) {
+    const url = request.nextUrl.clone();
+    url.pathname = `/id${pathname}`;
+    const headers = new Headers(request.headers);
+    headers.set("X-NEXT-INTL-LOCALE", "id");
+    const response = NextResponse.rewrite(url, { request: { headers } });
+    await refreshSession(request, response);
+    return response;
   }
 
   // Marketing site: run next-intl, then attach refreshed auth cookies to its

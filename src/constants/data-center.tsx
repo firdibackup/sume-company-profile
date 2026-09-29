@@ -71,6 +71,8 @@ const logos = {
     { name: "Yuchai", image: "/partner/yuchai.jpg" },
     { name: "IHI", image: "/partner/ihi.webp" },
     { name: "NIIGATA", image: "/partner/niigata.webp" },
+    { name: "Weichai", image: "/partner/weichai.webp" },
+    { name: "Baudouin", image: "/partner/baudouin.webp" },
   ],
   cooling: [
     { name: "Midea", image: "/partner/midea.png" },

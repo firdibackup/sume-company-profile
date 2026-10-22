@@ -55,7 +55,7 @@ export function Footer() {
 
           <FooterColumn title={t("offices")}>
             {footerOffices[locale].map((office) => (
-              <FooterLink key={office} href="/regional">
+              <FooterLink key={office} href="/contact">
                 {office}
               </FooterLink>
             ))}

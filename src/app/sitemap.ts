@@ -17,7 +17,6 @@ const routes: Route[] = [
   { path: "/our-project", changeFrequency: "weekly", priority: 0.8 },
   { path: "/about", changeFrequency: "monthly", priority: 0.7 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.7 },
-  { path: "/regional", changeFrequency: "monthly", priority: 0.6 },
 ];
 
 /** Builds an absolute URL for a locale-prefixed path. */

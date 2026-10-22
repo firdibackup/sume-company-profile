@@ -1,57 +1,10 @@
-import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
-import { languageAlternates } from "@/i18n/metadata";
-import type { Locale } from "@/i18n/routing";
+import { notFound } from "next/navigation";
 
-type PageProps = {
-  params: Promise<{ locale: string }>;
-};
-
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const { locale } = await params;
-  const t = await getTranslations({
-    locale: locale as Locale,
-    namespace: "RegionalPage",
-  });
-
-  return {
-    title: t("metaTitle"),
-    description: t("metaDescription"),
-    alternates: {
-      canonical: languageAlternates("/regional")[locale],
-      languages: languageAlternates("/regional"),
-    },
-  };
-}
-
-export default async function RegionalPage({ params }: PageProps) {
-  const { locale } = await params;
-  const loc = locale as Locale;
-
-  setRequestLocale(loc);
-
-  return (
-    <main className="min-h-[60vh] bg-white">
-      <div className="sume-wrap flex min-h-[60vh] items-center py-24">
-        <div className="max-w-2xl">
-          <p className="sume-eyebrow mb-3.5 block">Temporarily unavailable</p>
-          <h1 className="font-head text-[clamp(28px,3vw,40px)] font-semibold leading-[1.1] tracking-[-0.02em] text-sume-navy">
-            This page is temporarily disabled.
-          </h1>
-          <p className="mt-4 max-w-[54ch] text-lg text-sume-body">
-            We are updating this section and it is not available for now. Please
-            check back soon.
-          </p>
-          <Link href="/" className="sume-btn sume-btn-primary mt-8 inline-flex">
-            Back to home
-          </Link>
-        </div>
-      </div>
-    </main>
-  );
+// Disabled: a real 404 lets Google drop the URL. The previous 200 "temporarily
+// disabled" page was a soft 404. To restore, bring back the imports and
+// generateMetadata from git history (before this commit) plus the body below.
+export default function RegionalPage() {
+  notFound();
 }
 
 /*
